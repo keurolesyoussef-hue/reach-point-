@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Testimonials — ReachPoint</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .testimonials-hero { padding: calc(var(--nav-h) + 80px) 0 64px; position: relative; }
+    .testimonials-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, #3F1714 0%, transparent 65%);
+    }
+    .testimonials-hero-inner { position: relative; z-index: 1; }
+
+    /* Testimonial grid */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .testimonial-card {
+      background: rgba(254,239,221,0.03);
+      border: 1px solid rgba(254,239,221,0.08);
+      border-radius: 16px;
+      padding: 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      transition: var(--transition);
+      position: relative;
+    }
+    .testimonial-card:hover {
+      border-color: rgba(181,36,32,0.3);
+      background: rgba(181,36,32,0.04);
+      transform: translateY(-4px);
+    }
+    .testimonial-card.featured {
+      grid-column: span 2;
+      background: linear-gradient(135deg, rgba(91,22,19,0.15), rgba(13,13,13,0));
+      border-color: rgba(181,36,32,0.25);
+    }
+    .quote-mark {
+      font-family: var(--font-display);
+      font-size: 80px;
+      color: rgba(181,36,32,0.25);
+      line-height: 0.6;
+      height: 40px;
+    }
+    .testimonial-text {
+      font-size: 16px;
+      color: var(--cream-dim);
+      line-height: 1.8;
+      font-style: italic;
+      flex: 1;
+    }
+    .testimonial-card.featured .testimonial-text { font-size: 18px; }
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding-top: 20px;
+      border-top: 1px solid var(--cream-faint);
+    }
+    .author-avatar {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #2B0B0B, #0D0D0D);
+      border: 1.5px solid rgba(181,36,32,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+    .author-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .author-name { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--cream); }
+    .author-title { font-size: 12px; color: var(--red); letter-spacing: 2px; margin-top: 2px; }
+    .stars { color: var(--red); font-size: 14px; letter-spacing: 2px; }
+
+    /* Voice note section */
+    .voice-section-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+    .voice-card {
+      background: rgba(254,239,221,0.03);
+      border: 1px solid rgba(254,239,221,0.08);
+      border-radius: 16px;
+      padding: 28px 32px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      transition: var(--transition);
+    }
+    .voice-card:hover { border-color: rgba(181,36,32,0.3); }
+    .voice-icon {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: rgba(181,36,32,0.15);
+      border: 1.5px solid rgba(181,36,32,0.4);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .voice-waveform {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      height: 36px;
+    }
+    .voice-bar {
+      width: 3px;
+      border-radius: 2px;
+      background: rgba(181,36,32,0.4);
+      transition: var(--transition);
+    }
+    .voice-card:hover .voice-bar { background: var(--red); }
+    .voice-info { text-align: right; flex-shrink: 0; }
+    .voice-name { font-size: 14px; font-weight: 600; color: var(--cream); }
+    .voice-duration { font-size: 12px; color: var(--cream-dim); margin-top: 3px; }
+
+    @media (max-width: 1024px) {
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .testimonial-card.featured { grid-column: span 1; }
+      .voice-section-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="testimonials-hero">
+    <div class="container testimonials-hero-inner">
+      <p class="label fade-up">What Clients Say</p>
+      <span class="rule" style="margin:16px 0"></span>
+      <h1 class="fade-up delay-1">Real Words.<br><span style="color:var(--red)">Real Results.</span></h1>
+      <p class="fade-up delay-2" style="color:var(--cream-dim);font-size:18px;max-width:520px;line-height:1.8;margin-top:20px">
+        We let the work — and the clients who trusted us with it — speak for themselves.
+      </p>
+    </div>
+  </section>
+
+  <!-- Written Testimonials -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="label">Client Reviews</p>
+        <span class="rule"></span>
+        <h2>What They Said</h2>
+        <p>Unscripted. Unfiltered. Honest feedback from brands we've worked with.</p>
+      </div>
+
+      <div class="testimonials-grid">
+
+        <!-- Featured testimonial -->
+        <div class="testimonial-card featured reveal">
+          <div class="stars">★★★★★</div>
+          <div class="quote-mark">"</div>
+          <p class="testimonial-text">
+            <!--
+              REPLACE with actual client testimonial.
+              Example: "ReachPoint completely transformed how our brand looks online. The quality of production, the attention to detail, and the consistent communication made the whole process effortless. Our engagement tripled in two months."
+            -->
+            [Replace with client testimonial — paste the full review text here. The more specific and genuine, the better.]
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar">
+              <!-- <img src="images/clients/client1.jpg" alt="Client"> -->
+              👤
+            </div>
+            <div>
+              <div class="author-name">[Client Name]</div>
+              <div class="author-title">[Title] — [Company]</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right column testimonials -->
+        <div style="display:flex;flex-direction:column;gap:24px">
+          <div class="testimonial-card reveal delay-1">
+            <div class="stars">★★★★★</div>
+            <p class="testimonial-text">[Replace with client testimonial.]</p>
+            <div class="testimonial-author">
+              <div class="author-avatar">👤</div>
+              <div>
+                <div class="author-name">[Client Name]</div>
+                <div class="author-title">[Title] — [Company]</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card reveal delay-2">
+            <div class="stars">★★★★★</div>
+            <p class="testimonial-text">[Replace with client testimonial.]</p>
+            <div class="testimonial-author">
+              <div class="author-avatar">👤</div>
+              <div>
+                <div class="author-name">[Client Name]</div>
+                <div class="author-title">[Title] — [Company]</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 2 -->
+        <div class="testimonial-card reveal delay-1">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">[Replace with client testimonial.]</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">👤</div>
+            <div>
+              <div class="author-name">[Client Name]</div>
+              <div class="author-title">[Title] — [Company]</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card reveal delay-2">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">[Replace with client testimonial.]</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">👤</div>
+            <div>
+              <div class="author-name">[Client Name]</div>
+              <div class="author-title">[Title] — [Company]</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card reveal delay-3">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">[Replace with client testimonial.]</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">👤</div>
+            <div>
+              <div class="author-name">[Client Name]</div>
+              <div class="author-title">[Title] — [Company]</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Voice Note Testimonials -->
+  <section class="section" style="background:rgba(254,239,221,0.01)">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="label">Voice Feedback</p>
+        <span class="rule"></span>
+        <h2>Straight From<br>The Client.</h2>
+        <p>Real WhatsApp voice notes — because words on a screen only go so far.</p>
+      </div>
+      <div class="voice-section-grid">
+        <!-- Replace duration and name with actual client data -->
+        <div class="voice-card reveal delay-1">
+          <div class="voice-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#B52420" stroke-width="1.5" stroke-linecap="round">
+              <rect x="9" y="2" width="6" height="12" rx="3"/>
+              <path d="M5 10a7 7 0 0 0 14 0"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/>
+            </svg>
+          </div>
+          <div class="voice-waveform" id="wv1"></div>
+          <div class="voice-info">
+            <div class="voice-name">[Client Name]</div>
+            <div class="voice-duration">0:42</div>
+          </div>
+        </div>
+        <div class="voice-card reveal delay-2">
+          <div class="voice-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#B52420" stroke-width="1.5" stroke-linecap="round">
+              <rect x="9" y="2" width="6" height="12" rx="3"/>
+              <path d="M5 10a7 7 0 0 0 14 0"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/>
+            </svg>
+          </div>
+          <div class="voice-waveform" id="wv2"></div>
+          <div class="voice-info">
+            <div class="voice-name">[Client Name]</div>
+            <div class="voice-duration">0:58</div>
+          </div>
+        </div>
+        <div class="voice-card reveal delay-3">
+          <div class="voice-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#B52420" stroke-width="1.5" stroke-linecap="round">
+              <rect x="9" y="2" width="6" height="12" rx="3"/>
+              <path d="M5 10a7 7 0 0 0 14 0"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/>
+            </svg>
+          </div>
+          <div class="voice-waveform" id="wv3"></div>
+          <div class="voice-info">
+            <div class="voice-name">[Client Name]</div>
+            <div class="voice-duration">1:14</div>
+          </div>
+        </div>
+        <div class="voice-card reveal delay-4">
+          <div class="voice-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#B52420" stroke-width="1.5" stroke-linecap="round">
+              <rect x="9" y="2" width="6" height="12" rx="3"/>
+              <path d="M5 10a7 7 0 0 0 14 0"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/>
+            </svg>
+          </div>
+          <div class="voice-waveform" id="wv4"></div>
+          <div class="voice-info">
+            <div class="voice-name">[Client Name]</div>
+            <div class="voice-duration">0:35</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section" style="text-align:center">
+    <div class="container">
+      <div class="reveal">
+        <p class="label">You're Next</p>
+        <span class="rule rule-center"></span>
+        <h2 style="margin-bottom:16px">Ready to Be<br>Our Next Success Story?</h2>
+        <p style="color:var(--cream-dim);font-size:17px;max-width:440px;margin:0 auto 40px">Join the brands that decided to do content right. Let's talk.</p>
+        <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+          <a href="contact.html" class="btn btn-primary">Get a Proposal</a>
+          <a href="https://wa.me/201507077974" target="_blank" class="btn btn-ghost">WhatsApp Us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="js/layout.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    // Generate voice waveform bars
+    ['wv1','wv2','wv3','wv4'].forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      for (let i = 0; i < 48; i++) {
+        const bar = document.createElement('div');
+        bar.className = 'voice-bar';
+        bar.style.height = (8 + Math.random() * 24) + 'px';
+        el.appendChild(bar);
+      }
+    });
+  </script>
+</body>
+</html>

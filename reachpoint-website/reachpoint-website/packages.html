@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Packages — ReachPoint</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .packages-hero { padding: calc(var(--nav-h) + 80px) 0 64px; position: relative; }
+    .packages-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, #3F1714 0%, transparent 65%);
+    }
+    .packages-hero-inner { position: relative; z-index: 1; }
+
+    /* Toggle */
+    .pkg-toggle {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 56px;
+      flex-wrap: wrap;
+    }
+    .toggle-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--cream-dim);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .toggle-label.active { color: var(--cream); }
+    .toggle-switch {
+      width: 52px; height: 28px;
+      background: rgba(254,239,221,0.1);
+      border-radius: 14px;
+      position: relative;
+      cursor: pointer;
+      border: 1px solid rgba(254,239,221,0.12);
+      transition: var(--transition);
+    }
+    .toggle-switch.on { background: var(--red); }
+    .toggle-switch::after {
+      content: '';
+      position: absolute;
+      top: 3px; left: 3px;
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: var(--cream);
+      transition: transform var(--transition);
+    }
+    .toggle-switch.on::after { transform: translateX(24px); }
+
+    /* Package cards */
+    .packages-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+    .pkg-card {
+      background: rgba(254,239,221,0.03);
+      border: 1.5px solid rgba(254,239,221,0.08);
+      border-radius: 16px;
+      padding: 40px 36px;
+      position: relative;
+      transition: var(--transition);
+    }
+    .pkg-card:hover {
+      border-color: rgba(181,36,32,0.3);
+      background: rgba(181,36,32,0.04);
+      transform: translateY(-4px);
+    }
+    .pkg-card.featured {
+      border-color: var(--red);
+      background: linear-gradient(135deg, rgba(91,22,19,0.2), rgba(13,13,13,0));
+    }
+    .pkg-card.featured::before {
+      content: 'MOST POPULAR';
+      position: absolute;
+      top: -14px; left: 50%;
+      transform: translateX(-50%);
+      background: var(--red);
+      color: var(--cream);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      padding: 5px 16px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .pkg-num {
+      font-family: var(--font-body);
+      font-size: 10px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--red);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .pkg-name {
+      font-family: var(--font-display);
+      font-size: 36px;
+      font-weight: 900;
+      color: var(--cream);
+      margin-bottom: 8px;
+    }
+    .pkg-desc {
+      font-size: 14px;
+      color: var(--cream-dim);
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+    .pkg-price {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      padding: 20px 0;
+      border-top: 1px solid var(--cream-faint);
+      border-bottom: 1px solid var(--cream-faint);
+      margin-bottom: 28px;
+    }
+    .pkg-price-num {
+      font-family: var(--font-display);
+      font-size: 52px;
+      font-weight: 900;
+      color: var(--cream);
+      letter-spacing: -2px;
+      line-height: 1;
+    }
+    .pkg-price-unit {
+      font-size: 13px;
+      color: var(--cream-dim);
+      line-height: 1.4;
+    }
+
+    .pkg-features { margin-bottom: 32px; }
+    .pkg-feature {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(254,239,221,0.05);
+      font-size: 15px;
+      color: var(--cream-dim);
+    }
+    .pkg-feature:last-child { border-bottom: none; }
+    .pkg-feature-check {
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: rgba(181,36,32,0.15);
+      border: 1px solid rgba(181,36,32,0.4);
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--red);
+      font-size: 11px;
+    }
+    .pkg-feature strong { color: var(--cream); font-weight: 600; }
+
+    /* Included banner */
+    .included-banner {
+      background: rgba(181,36,32,0.08);
+      border: 1px solid rgba(181,36,32,0.2);
+      border-radius: 12px;
+      padding: 28px 32px;
+    }
+    .included-banner h4 {
+      font-family: var(--font-body);
+      font-size: 11px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--red);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .included-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    .included-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--cream-dim);
+    }
+    .included-item::before {
+      content: '';
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: rgba(181,36,32,0.6);
+      flex-shrink: 0;
+    }
+
+    /* Compare table */
+    .compare-table { width: 100%; border-collapse: collapse; margin-top: 48px; }
+    .compare-table th {
+      padding: 16px 20px;
+      text-align: left;
+      font-family: var(--font-body);
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--red);
+      border-bottom: 1px solid rgba(181,36,32,0.3);
+    }
+    .compare-table th:first-child { color: var(--cream-dim); }
+    .compare-table td {
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--cream-faint);
+      font-size: 14px;
+      color: var(--cream-dim);
+    }
+    .compare-table td:first-child { color: var(--cream); font-weight: 500; }
+    .compare-table td.check { color: var(--red); text-align: center; font-size: 16px; }
+    .compare-table td.dash { color: rgba(254,239,221,0.2); text-align: center; }
+    .compare-table tr:hover td { background: rgba(254,239,221,0.02); }
+
+    .note-box {
+      background: rgba(254,239,221,0.03);
+      border: 1px solid rgba(254,239,221,0.08);
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin-top: 24px;
+      font-size: 13px;
+      color: var(--cream-dim);
+      font-style: italic;
+      line-height: 1.7;
+    }
+    .note-box strong { color: var(--cream); font-style: normal; }
+
+    @media (max-width: 1024px) {
+      .packages-grid { grid-template-columns: 1fr; max-width: 560px; margin: 0 auto; }
+      .included-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="packages-hero">
+    <div class="container packages-hero-inner">
+      <p class="label fade-up">Transparent Pricing</p>
+      <span class="rule" style="margin:16px 0"></span>
+      <h1 class="fade-up delay-1">Our<br><span style="color:var(--red)">Packages.</span></h1>
+      <p class="fade-up delay-2" style="color:var(--cream-dim);font-size:18px;max-width:520px;line-height:1.8;margin-top:20px">
+        No hidden fees. No vague proposals. Just clear packages built around what your brand actually needs.
+      </p>
+    </div>
+  </section>
+
+  <!-- Social Media Packages -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="label">Social Media Management</p>
+        <span class="rule"></span>
+        <h2>Monthly Packages</h2>
+        <p>Full-service content management — production, strategy, and publishing. All in one package.</p>
+      </div>
+
+      <div class="packages-grid">
+
+        <!-- Starter -->
+        <div class="pkg-card reveal delay-1">
+          <div class="pkg-num">01 — STARTER</div>
+          <div class="pkg-name">Starter</div>
+          <div class="pkg-desc">Perfect for brands starting to take their social media seriously.</div>
+          <div class="pkg-price">
+            <div class="pkg-price-num">25,000</div>
+            <div class="pkg-price-unit">EGP<br>/Month</div>
+          </div>
+          <div class="pkg-features">
+            <div class="pkg-feature"><div class="pkg-feature-check">✓</div><span><strong>1</strong> Shooting Day</span></div>
+            <div class="pkg-feature"><div class="pkg-feature-check">✓</div><span><strong>6</strong> Professional Reels</span></div>
+            <div class="pkg-feature"><div class="pkg-feature-check">✓</div><span><strong>6</strong> Social Media Designs</span></div>
+            <div class="pkg-feature"><div class="pkg-feature-check">✓</div><span>Content Planning</span></div>
+            <div class="pkg-feature"><div class="pkg-feature-check">✓</div><span>Script Writing</span></div>
+            <div class="pkg-feature"><div class="pkg-feature-check">✓</div><span>Caption Writing</span></div>
+            <div class="pkg-feature"><div class="pkg-feature-check">✓</div><span>Content Calendar</span></div>
+            <div class="pkg-feature"><div class="pkg-feature-check">✓</div><span>Professional Editing</span></div>
+            <div class="pkg-feature"><div class="pkg-feature-check">✓</div><span>Color Grading</span></div>
+            <div class="pkg-feature"><div class="pkg-feature-check">✓</div><span>Cover Design for all Reels</span></div>
+            <div class="pkg-feature"><div class="pkg-feature-check">✓</div><span>Publishing</span></div>
+          </div>
+          <a href="https://wa.me/201507077974?text=Hi! I'm interested in the Starter Package (25,000 EGP/Month)" target="_blank" class="btn btn-outline" style="width:100%;justify-content:center">Get Started</a>
+        </div>
+
+        <!-- Growth -->
+        <div class="pkg-card featured reveal delay-2">
+          <div class="pkg-num">02 — GROWTH</div>
+          <div class="pkg-name">Growth</div>
+          <div class="pkg-desc">For brands ready to scale their content output and audience reach.</div>
+          <div class="pkg-price">
+            <div class="pkg-price-num">35,000</div>
+            <div class="pkg-price-unit">EGP<br>/Month</div>
+          </div>
+          <div class="pkg-features">
+            <div class="pkg-feature"><div class="pkg-feature-check">✓</div><span><strong>2</strong> Shooting Days</span></div>
+            <div class="pkg-feature"><div class="pkg-feature-check">✓</div><span><strong>10</strong> Professional Reels</span></div>
+            <div class="pkg-feature"><div class="pkg-feature-check">✓</div><span><strong>10</strong> Social Media Designs</span></div>
+            <div class="pkg-feature"><div class="pkg-feature-check">✓</div><span>Content Strategy</span></div>
+            <div class="pkg-feature"><div class="pkg-feature-check">✓</div><span>Script Writing</span></div>
+            <div class="pkg-feature"><div class="pkg-feature-check">✓</div><span>Caption Writing</span></div>
+            <div class="pkg-feature"><div class="pkg-feature-check">✓</div><span>Professional Editing</span></div>
+            <div class="pkg-feature"><div class="pkg-feature-check">✓</div><span>Monthly Performance Report</span></div>
+            <div class="pkg-feature"><div class="pkg-feature-check">✓</div><span>Publishing</span></div>
+          </div>
+          <a href="https://wa.me/201507077974?text=Hi! I'm interested in the Growth Package (35,000 EGP/Month)" target="_blank" class="btn btn-primary" style="width:100%;justify-content:center">Get Started</a>
+        </div>
+
+        <!-- Premium -->
+        <div class="pkg-card reveal delay-3">
+          <div class="pkg-num">03 — PREMIUM</div>
+          <div class="pkg-name">Premium</div>
+          <div class="pkg-desc">For established brands demanding the highest level of content and strategy.</div>
+          <div class="pkg-price">
+            <div class="pkg-price-num">45,000</div>
+            <div class="pkg-price-unit">EGP<br>/Month</div>
+          </div>
+          <div class="pkg-features">
+            <div class="pkg-feature"><div class="pkg-feature-check">✓</div><span><strong>3</strong> Shooting Days</span></div>
+            <div class="pkg-feature"><div class="pkg-feature-check">✓</div><span><strong>15</strong> Premium Reels</span></div>
+            <div class="pkg-feature"><div class="pkg-feature-check">✓</div><span><strong>15</strong> Social Media Designs</span></div>
+            <div class="pkg-feature"><div class="pkg-feature-check">✓</div><span>Full Content Strategy</span></div>
+            <div class="pkg-feature"><div class="pkg-feature-check">✓</div><span>Script Writing</span></div>
+            <div class="pkg-feature"><div class="pkg-feature-check">✓</div><span>Copywriting</span></div>
+            <div class="pkg-feature"><div class="pkg-feature-check">✓</div><span>Caption Writing</span></div>
+            <div class="pkg-feature"><div class="pkg-feature-check">✓</div><span>Advanced Editing</span></div>
+            <div class="pkg-feature"><div class="pkg-feature-check">✓</div><span>Monthly Analytics Report</span></div>
+            <div class="pkg-feature"><div class="pkg-feature-check">✓</div><span>Monthly Strategy Meeting</span></div>
+            <div class="pkg-feature"><div class="pkg-feature-check">✓</div><span>Publishing</span></div>
+          </div>
+          <a href="https://wa.me/201507077974?text=Hi! I'm interested in the Premium Package (45,000 EGP/Month)" target="_blank" class="btn btn-ghost" style="width:100%;justify-content:center">Get Started</a>
+        </div>
+
+      </div>
+
+      <!-- Included in all -->
+      <div class="included-banner reveal" style="margin-top:40px">
+        <h4>Included in All Packages</h4>
+        <div class="included-grid">
+          <div class="included-item">Professional video production & cinematography</div>
+          <div class="included-item">Professional editing & post-production</div>
+          <div class="included-item">Fast turnaround & dedicated support</div>
+          <div class="included-item">Content publishing across all platforms</div>
+        </div>
+      </div>
+
+      <div class="note-box reveal">
+        <strong>Note:</strong> Sponsored ads (Media Buying) and advertising budgets are <strong>not included</strong> in any package and are charged separately based on your campaign requirements.
+      </div>
+    </div>
+  </section>
+
+  <!-- Media Production Packages (per project) -->
+  <section class="section" style="background:rgba(254,239,221,0.01)">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="label">Per-Project Pricing</p>
+        <span class="rule"></span>
+        <h2>Video Production<br>Packages</h2>
+        <p>One-time production packages for brands needing high-quality video output without monthly commitment.</p>
+      </div>
+
+      <div style="overflow-x:auto">
+        <table class="compare-table reveal">
+          <thead>
+            <tr>
+              <th>What's Included</th>
+              <th>Starter<br><span style="color:var(--cream);font-family:var(--font-display);font-size:20px;font-weight:900">8,000</span> L.E</th>
+              <th>Growth<br><span style="color:var(--cream);font-family:var(--font-display);font-size:20px;font-weight:900">15,000</span> L.E</th>
+              <th>Scaling<br><span style="color:var(--cream);font-family:var(--font-display);font-size:20px;font-weight:900">21,000</span> L.E</th>
+              <th>Professional<br><span style="color:var(--cream);font-family:var(--font-display);font-size:20px;font-weight:900">26,000</span> L.E</th>
+              <th>Elite<br><span style="color:var(--cream);font-family:var(--font-display);font-size:20px;font-weight:900">30,000</span> L.E</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Reels / Month</td><td>5</td><td>10</td><td>15</td><td>20</td><td>30</td></tr>
+            <tr><td>Shooting Days</td><td>1</td><td>1</td><td>2</td><td>2</td><td>3</td></tr>
+            <tr><td>Cinematic Production</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+            <tr><td>Color Grading</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+            <tr><td>Optimized for IG / TikTok</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+            <tr><td>Music & Subtitles</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section" style="text-align:center">
+    <div class="container">
+      <div class="reveal">
+        <p class="label">Not Sure Which?</p>
+        <span class="rule rule-center"></span>
+        <h2 style="margin-bottom:16px">Let's Find the<br>Right Fit Together.</h2>
+        <p style="color:var(--cream-dim);font-size:17px;max-width:440px;margin:0 auto 40px">Tell us about your brand and goals. We'll recommend the right package — no pressure.</p>
+        <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+          <a href="https://wa.me/201507077974?text=Hi! I'd like to discuss which package suits my brand." target="_blank" class="btn btn-primary">WhatsApp Us</a>
+          <a href="contact.html" class="btn btn-ghost">Send a Message</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="js/layout.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

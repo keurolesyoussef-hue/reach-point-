@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services — ReachPoint</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .services-hero { padding: calc(var(--nav-h) + 80px) 0 64px; position: relative; }
+    .services-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, #3F1714 0%, transparent 65%);
+    }
+    .services-hero-inner { position: relative; z-index: 1; }
+
+    /* Service blocks */
+    .service-block {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      padding: 80px 0;
+      border-bottom: 1px solid var(--cream-faint);
+    }
+    .service-block:last-child { border-bottom: none; }
+    .service-block.reverse .service-text { order: 2; }
+    .service-block.reverse .service-visual { order: 1; }
+
+    .service-num-big {
+      font-family: var(--font-label);
+      font-size: 120px;
+      color: rgba(181,36,32,0.08);
+      line-height: 1;
+      margin-bottom: -20px;
+    }
+    .service-text .label { margin-bottom: 12px; }
+    .service-text h2 { font-size: clamp(32px, 4vw, 48px); margin-bottom: 16px; }
+    .service-text > p { color: var(--cream-dim); font-size: 17px; line-height: 1.8; margin-bottom: 32px; }
+
+    .service-features {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-bottom: 36px;
+    }
+    .service-feature {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--cream-faint);
+      font-size: 15px;
+      color: var(--cream-dim);
+    }
+    .service-feature:last-child { border-bottom: none; }
+    .service-feature::before {
+      content: '';
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--red);
+      flex-shrink: 0;
+    }
+
+    .service-visual {
+      height: 420px;
+      background: linear-gradient(135deg, #2B0B0B, #0D0D0D);
+      border-radius: 16px;
+      border: 1px solid rgba(254,239,221,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .service-visual::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 4px; height: 100%;
+      background: linear-gradient(to bottom, var(--red), transparent);
+    }
+    .service-visual-label {
+      position: absolute;
+      bottom: 24px; left: 24px;
+      font-family: var(--font-label);
+      font-size: 13px;
+      letter-spacing: 4px;
+      color: rgba(254,239,221,0.2);
+    }
+
+    /* Process */
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      position: relative;
+    }
+    .process-steps::before {
+      content: '';
+      position: absolute;
+      top: 28px; left: 12.5%; right: 12.5%;
+      height: 1px;
+      background: linear-gradient(90deg, var(--red), rgba(181,36,32,0.2), transparent);
+    }
+    .process-step { padding: 0 20px; text-align: center; }
+    .step-num {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: var(--red-glow);
+      border: 1.5px solid rgba(181,36,32,0.4);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--cream);
+      margin: 0 auto 20px;
+      position: relative;
+      z-index: 1;
+    }
+    .process-step h4 { font-size: 18px; margin-bottom: 8px; }
+    .process-step p { font-size: 14px; color: var(--cream-dim); line-height: 1.6; }
+
+    @media (max-width: 1024px) {
+      .service-block { grid-template-columns: 1fr; gap: 40px; }
+      .service-block.reverse .service-text { order: 0; }
+      .service-block.reverse .service-visual { order: 0; }
+      .service-visual { height: 280px; }
+      .process-steps { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+      .process-steps::before { display: none; }
+    }
+    @media (max-width: 600px) {
+      .process-steps { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="services-hero">
+    <div class="container services-hero-inner">
+      <p class="label fade-up">What We Offer</p>
+      <span class="rule" style="margin:16px 0"></span>
+      <h1 class="fade-up delay-1">Our<br><span style="color:var(--red)">Services.</span></h1>
+      <p class="fade-up delay-2" style="color:var(--cream-dim);font-size:18px;max-width:520px;line-height:1.8;margin-top:20px">
+        From the first concept to the final publish — every service we offer is built to move your brand forward.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+
+      <!-- 01 Video Production -->
+      <div class="service-block reveal">
+        <div class="service-text">
+          <div class="service-num-big">01</div>
+          <p class="label">Production</p>
+          <span class="rule"></span>
+          <h2>Video Production</h2>
+          <p>Cinematic shoots built to stop the scroll and tell your brand's story in a way that stays with people long after they watch it.</p>
+          <div class="service-features">
+            <div class="service-feature">Branded commercials & ads</div>
+            <div class="service-feature">Instagram & TikTok Reels</div>
+            <div class="service-feature">Promotional & launch videos</div>
+            <div class="service-feature">Documentary & testimonial shoots</div>
+            <div class="service-feature">Professional lighting & stabilization</div>
+            <div class="service-feature">Location scouting & direction</div>
+          </div>
+          <a href="contact.html" class="btn btn-ghost">Get a Quote</a>
+        </div>
+        <div class="service-visual reveal delay-2">
+          🎬
+          <div class="service-visual-label">VIDEO PRODUCTION</div>
+        </div>
+      </div>
+
+      <!-- 02 Post Production -->
+      <div class="service-block reverse reveal">
+        <div class="service-text">
+          <div class="service-num-big">02</div>
+          <p class="label">Editing</p>
+          <span class="rule"></span>
+          <h2>Post Production</h2>
+          <p>Raw footage transformed into polished, story-driven visuals through expert editing, cinematic color, and precise sound design.</p>
+          <div class="service-features">
+            <div class="service-feature">Professional video editing</div>
+            <div class="service-feature">Cinematic color grading</div>
+            <div class="service-feature">Motion graphics & titles</div>
+            <div class="service-feature">Sound design & music selection</div>
+            <div class="service-feature">Subtitles & caption integration</div>
+            <div class="service-feature">Cover design for each reel</div>
+          </div>
+          <a href="contact.html" class="btn btn-ghost">Get a Quote</a>
+        </div>
+        <div class="service-visual reveal delay-1">
+          🎞️
+          <div class="service-visual-label">POST PRODUCTION</div>
+        </div>
+      </div>
+
+      <!-- 03 Storyboard -->
+      <div class="service-block reveal">
+        <div class="service-text">
+          <div class="service-num-big">03</div>
+          <p class="label">Pre-Production</p>
+          <span class="rule"></span>
+          <h2>Storyboard &<br>Creative Direction</h2>
+          <p>Before the camera rolls, the story is planned. We build the creative foundation that makes every shoot efficient and every frame purposeful.</p>
+          <div class="service-features">
+            <div class="service-feature">Full storyboard creation</div>
+            <div class="service-feature">Script writing & dialogue</div>
+            <div class="service-feature">Shot list & scene planning</div>
+            <div class="service-feature">Creative concept development</div>
+            <div class="service-feature">Mood boards & visual direction</div>
+          </div>
+          <a href="contact.html" class="btn btn-ghost">Get a Quote</a>
+        </div>
+        <div class="service-visual reveal delay-2">
+          📋
+          <div class="service-visual-label">STORYBOARD & DIRECTION</div>
+        </div>
+      </div>
+
+      <!-- 04 Social Media -->
+      <div class="service-block reverse reveal">
+        <div class="service-text">
+          <div class="service-num-big">04</div>
+          <p class="label">Management</p>
+          <span class="rule"></span>
+          <h2>Social Media<br>Management</h2>
+          <p>Full platform management that handles everything — so you can focus on your business while your brand grows online, every single day.</p>
+          <div class="service-features">
+            <div class="service-feature">Content strategy & planning</div>
+            <div class="service-feature">Content calendar management</div>
+            <div class="service-feature">Caption & copy writing</div>
+            <div class="service-feature">Scheduling & publishing</div>
+            <div class="service-feature">Community engagement</div>
+            <div class="service-feature">Monthly performance reports</div>
+          </div>
+          <a href="packages.html" class="btn btn-ghost">View Packages</a>
+        </div>
+        <div class="service-visual reveal delay-1">
+          📱
+          <div class="service-visual-label">SOCIAL MEDIA MANAGEMENT</div>
+        </div>
+      </div>
+
+      <!-- 05 Content Writing -->
+      <div class="service-block reveal">
+        <div class="service-text">
+          <div class="service-num-big">05</div>
+          <p class="label">Copy & Content</p>
+          <span class="rule"></span>
+          <h2>Content Writing<br>& Strategy</h2>
+          <p>Words that sell, engage, and build authority. Every caption, script, and piece of copy is crafted to work as hard as your visuals.</p>
+          <div class="service-features">
+            <div class="service-feature">Video scripts & dialogue</div>
+            <div class="service-feature">Social media captions</div>
+            <div class="service-feature">Ad copywriting</div>
+            <div class="service-feature">Blog & article writing</div>
+            <div class="service-feature">Full content strategy</div>
+          </div>
+          <a href="contact.html" class="btn btn-ghost">Get a Quote</a>
+        </div>
+        <div class="service-visual reveal delay-2">
+          ✍️
+          <div class="service-visual-label">CONTENT WRITING</div>
+        </div>
+      </div>
+
+      <!-- 06 Brand Identity -->
+      <div class="service-block reverse reveal">
+        <div class="service-text">
+          <div class="service-num-big">06</div>
+          <p class="label">Branding</p>
+          <span class="rule"></span>
+          <h2>Brand Identity<br>& Design</h2>
+          <p>A brand is more than a logo. We build complete visual identities that are consistent, memorable, and impossible to mistake for anyone else.</p>
+          <div class="service-features">
+            <div class="service-feature">Logo design & icon concepts</div>
+            <div class="service-feature">Color palette & typography</div>
+            <div class="service-feature">Brand book & guidelines</div>
+            <div class="service-feature">Social media templates</div>
+            <div class="service-feature">Business card & collateral</div>
+          </div>
+          <a href="contact.html" class="btn btn-ghost">Get a Quote</a>
+        </div>
+        <div class="service-visual reveal delay-1">
+          🎨
+          <div class="service-visual-label">BRAND IDENTITY & DESIGN</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section class="section" style="background:rgba(254,239,221,0.01)">
+    <div class="container">
+      <div class="section-header reveal" style="text-align:center">
+        <p class="label">How We Work</p>
+        <span class="rule rule-center"></span>
+        <h2>Our Process</h2>
+        <p style="margin:0 auto;text-align:center">Four steps from first conversation to final delivery.</p>
+      </div>
+      <div class="process-steps">
+        <div class="process-step reveal delay-1">
+          <div class="step-num">01</div>
+          <h4>Discovery</h4>
+          <p>We learn your brand, goals, audience, and competitors before touching a single tool.</p>
+        </div>
+        <div class="process-step reveal delay-2">
+          <div class="step-num">02</div>
+          <h4>Strategy</h4>
+          <p>We build the plan — content direction, scripts, shot lists, calendar. Everything mapped before day one.</p>
+        </div>
+        <div class="process-step reveal delay-3">
+          <div class="step-num">03</div>
+          <h4>Production</h4>
+          <p>Shoot, edit, grade, design. Every deliverable produced to the highest standard, on schedule.</p>
+        </div>
+        <div class="process-step reveal delay-4">
+          <div class="step-num">04</div>
+          <h4>Publish & Measure</h4>
+          <p>We publish, track performance, and optimize — turning data into smarter content every month.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section" style="text-align:center">
+    <div class="container">
+      <div class="reveal">
+        <p class="label">Start Today</p>
+        <span class="rule rule-center"></span>
+        <h2 style="margin-bottom:16px">The Right Service<br>Is Waiting for You.</h2>
+        <p style="color:var(--cream-dim);font-size:17px;max-width:460px;margin:0 auto 40px">Not sure which service fits your brand? Let's talk — we'll figure it out together.</p>
+        <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+          <a href="contact.html" class="btn btn-primary">Book a Free Consultation</a>
+          <a href="packages.html" class="btn btn-ghost">See Pricing</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="js/layout.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
