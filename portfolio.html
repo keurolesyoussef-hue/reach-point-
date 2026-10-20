@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio — ReachPoint</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .portfolio-hero { padding: calc(var(--nav-h) + 80px) 0 64px; position: relative; }
+    .portfolio-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, #3F1714 0%, transparent 65%);
+    }
+    .portfolio-hero-inner { position: relative; z-index: 1; }
+
+    /* Filter tabs */
+    .filter-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 56px;
+    }
+    .filter-tab {
+      padding: 10px 24px;
+      border: 1.5px solid rgba(254,239,221,0.12);
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--cream-dim);
+      cursor: pointer;
+      transition: var(--transition);
+      background: transparent;
+    }
+    .filter-tab:hover, .filter-tab.active {
+      border-color: var(--red);
+      color: var(--cream);
+      background: var(--red-glow);
+    }
+
+    /* Portfolio grid */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .portfolio-item {
+      border-radius: var(--radius);
+      overflow: hidden;
+      position: relative;
+      aspect-ratio: 9/16;
+      background: linear-gradient(135deg, #2B0B0B, #0D0D0D);
+      border: 1px solid rgba(254,239,221,0.08);
+      cursor: pointer;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .portfolio-item:first-child {
+      grid-column: span 2;
+      aspect-ratio: 16/9;
+    }
+    .portfolio-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    }
+    .portfolio-img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    .portfolio-item:hover .portfolio-img { transform: scale(1.03); }
+
+    /* Placeholder (remove when adding real images) */
+    .portfolio-placeholder {
+      width: 100%; height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: rgba(254,239,221,0.12);
+      font-size: 40px;
+    }
+    .portfolio-placeholder span {
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(254,239,221,0.1);
+      font-family: var(--font-body);
+    }
+
+    .portfolio-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(13,13,13,0.95) 0%, rgba(13,13,13,0.2) 50%, transparent 100%);
+      opacity: 0;
+      transition: opacity var(--transition);
+      display: flex;
+      align-items: flex-end;
+      padding: 28px;
+    }
+    .portfolio-item:hover .portfolio-overlay { opacity: 1; }
+    .portfolio-info h4 { font-size: 20px; margin-bottom: 4px; }
+    .portfolio-info p { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--red); }
+
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.9);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox-close {
+      position: absolute;
+      top: 24px; right: 24px;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: rgba(254,239,221,0.1);
+      border: none;
+      color: var(--cream);
+      font-size: 20px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    @media (max-width: 1024px) {
+      .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+      .portfolio-item:first-child { grid-column: span 2; }
+    }
+    @media (max-width: 600px) {
+      .portfolio-grid { grid-template-columns: 1fr; }
+      .portfolio-item:first-child { grid-column: span 1; aspect-ratio: 16/9; }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="portfolio-hero">
+    <div class="container portfolio-hero-inner">
+      <p class="label fade-up">Our Work</p>
+      <span class="rule" style="margin:16px 0"></span>
+      <h1 class="fade-up delay-1">Portfolio &<br><span style="color:var(--red)">Case Studies.</span></h1>
+      <p class="fade-up delay-2" style="color:var(--cream-dim);font-size:18px;max-width:520px;line-height:1.8;margin-top:20px">
+        Real brands. Real results. A selection of work we're proud to put our name on.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <!-- Filter -->
+      <div class="filter-tabs reveal">
+        <button class="filter-tab active" data-filter="all">All Work</button>
+        <button class="filter-tab" data-filter="video">Video Production</button>
+        <button class="filter-tab" data-filter="social">Social Media</button>
+        <button class="filter-tab" data-filter="brand">Branding</button>
+        <button class="filter-tab" data-filter="reels">Reels</button>
+      </div>
+
+      <!-- Grid -->
+      <div class="portfolio-grid">
+
+        <!-- Item 1 — Hero / wide -->
+        <div class="portfolio-item reveal" data-category="video">
+          <!--
+            REPLACE PLACEHOLDER:
+            Add actual image/video thumbnail:
+            <img class="portfolio-img" src="images/portfolio/project-01.jpg" alt="Project Name">
+          -->
+          <div class="portfolio-placeholder">🎬<span>Project 01</span></div>
+          <div class="portfolio-overlay">
+            <div class="portfolio-info">
+              <p>Video Production</p>
+              <h4>[Client Name] — Brand Commercial</h4>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="portfolio-item reveal delay-1" data-category="social">
+          <div class="portfolio-placeholder">📱<span>Project 02</span></div>
+          <div class="portfolio-overlay">
+            <div class="portfolio-info">
+              <p>Social Media</p>
+              <h4>[Client Name] — Social Campaign</h4>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="portfolio-item reveal delay-2" data-category="reels">
+          <div class="portfolio-placeholder">🎞️<span>Project 03</span></div>
+          <div class="portfolio-overlay">
+            <div class="portfolio-info">
+              <p>Reels Production</p>
+              <h4>[Client Name] — Monthly Reels</h4>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="portfolio-item reveal delay-1" data-category="brand">
+          <div class="portfolio-placeholder">🎨<span>Project 04</span></div>
+          <div class="portfolio-overlay">
+            <div class="portfolio-info">
+              <p>Brand Identity</p>
+              <h4>[Client Name] — Full Rebrand</h4>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 5 -->
+        <div class="portfolio-item reveal delay-2" data-category="video">
+          <div class="portfolio-placeholder">🎬<span>Project 05</span></div>
+          <div class="portfolio-overlay">
+            <div class="portfolio-info">
+              <p>Video Production</p>
+              <h4>[Client Name] — Product Video</h4>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 6 -->
+        <div class="portfolio-item reveal delay-3" data-category="social">
+          <div class="portfolio-placeholder">📊<span>Project 06</span></div>
+          <div class="portfolio-overlay">
+            <div class="portfolio-info">
+              <p>Content Strategy</p>
+              <h4>[Client Name] — Growth Campaign</h4>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 7 -->
+        <div class="portfolio-item reveal delay-1" data-category="reels">
+          <div class="portfolio-placeholder">▶️<span>Project 07</span></div>
+          <div class="portfolio-overlay">
+            <div class="portfolio-info">
+              <p>Reels Production</p>
+              <h4>[Client Name] — Reel Series</h4>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 8 -->
+        <div class="portfolio-item reveal delay-2" data-category="brand">
+          <div class="portfolio-placeholder">✨<span>Project 08</span></div>
+          <div class="portfolio-overlay">
+            <div class="portfolio-info">
+              <p>Brand Identity</p>
+              <h4>[Client Name] — Logo & Brand Book</h4>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!--
+        ══════════════════════════════════════════
+        HOW TO ADD YOUR PORTFOLIO IMAGES:
+
+        1. Create a folder: images/portfolio/
+        2. Add your image files (JPG/PNG/WEBP)
+        3. Replace each <div class="portfolio-placeholder">
+           with: <img class="portfolio-img" src="images/portfolio/your-image.jpg" alt="Project">
+        4. Update the project name and category in .portfolio-info
+        5. Update data-category attribute to match filter tabs
+        ══════════════════════════════════════════
+      -->
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section" style="text-align:center">
+    <div class="container">
+      <div class="reveal">
+        <p class="label">Next Up</p>
+        <span class="rule rule-center"></span>
+        <h2 style="margin-bottom:16px">Your Project<br>Could Be Here.</h2>
+        <p style="color:var(--cream-dim);font-size:17px;max-width:440px;margin:0 auto 40px">Let's create work you're proud to show the world.</p>
+        <a href="contact.html" class="btn btn-primary">Start a Project</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" onclick="document.getElementById('lightbox').classList.remove('open')">✕</button>
+  </div>
+
+  <script src="js/layout.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    // Filter functionality
+    const tabs   = document.querySelectorAll('.filter-tab');
+    const items  = document.querySelectorAll('.portfolio-item');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const filter = tab.dataset.filter;
+        items.forEach(item => {
+          const cat = item.dataset.category;
+          item.style.opacity = (filter === 'all' || cat === filter) ? '1' : '0.2';
+          item.style.pointerEvents = (filter === 'all' || cat === filter) ? '' : 'none';
+        });
+      });
+    });
+  </script>
+</body>
+</html>

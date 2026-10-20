@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — ReachPoint</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .about-hero { padding: calc(var(--nav-h) + 80px) 0 64px; position: relative; }
+    .about-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, #3F1714 0%, transparent 65%);
+    }
+    .about-hero-inner { position: relative; z-index: 1; }
+
+    .about-intro {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .about-intro-visual {
+      height: 480px;
+      background: linear-gradient(135deg, #2B0B0B, #0D0D0D);
+      border-radius: 16px;
+      border: 1px solid rgba(254,239,221,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 100px;
+      font-weight: 900;
+      color: rgba(254,239,221,0.04);
+      letter-spacing: -4px;
+      position: relative;
+      overflow: hidden;
+    }
+    .about-intro-visual::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--red), transparent);
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .value-card {
+      padding: 36px;
+      background: rgba(254,239,221,0.03);
+      border: 1px solid rgba(254,239,221,0.08);
+      border-radius: var(--radius);
+      transition: var(--transition);
+    }
+    .value-card:hover {
+      border-color: rgba(181,36,32,0.3);
+      background: rgba(181,36,32,0.04);
+    }
+    .value-icon {
+      font-size: 32px;
+      margin-bottom: 16px;
+      display: block;
+    }
+    .value-card h3 { font-size: 24px; margin-bottom: 10px; }
+    .value-card p { color: var(--cream-dim); font-size: 15px; line-height: 1.7; }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+    .team-card {
+      text-align: center;
+    }
+    .team-photo {
+      width: 100%;
+      aspect-ratio: 1;
+      background: linear-gradient(135deg, #2B0B0B, #0D0D0D);
+      border-radius: var(--radius);
+      margin-bottom: 20px;
+      border: 1px solid rgba(254,239,221,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      color: rgba(254,239,221,0.08);
+      overflow: hidden;
+    }
+    .team-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .team-card h4 { font-size: 22px; margin-bottom: 6px; }
+    .team-card .role { font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: var(--red); }
+
+    @media (max-width: 1024px) {
+      .about-intro { grid-template-columns: 1fr; }
+      .about-intro-visual { height: 280px; }
+      .values-grid, .team-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .values-grid, .team-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="about-hero">
+    <div class="container about-hero-inner">
+      <p class="label fade-up">Our Story</p>
+      <span class="rule" style="margin:16px 0"></span>
+      <h1 class="fade-up delay-1">We Are<br><em style="color:var(--red);font-style:italic">ReachPoint.</em></h1>
+      <p class="fade-up delay-2" style="color:var(--cream-dim);font-size:20px;max-width:560px;line-height:1.75;margin-top:20px">
+        A full-service media production agency built on one belief: your brand's story deserves to be told with precision, creativity, and purpose.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="about-intro">
+        <div class="reveal">
+          <p class="label">Who We Are</p>
+          <span class="rule"></span>
+          <h2 style="margin-bottom:20px">Built to Make<br>Brands Unmissable.</h2>
+          <p style="color:var(--cream-dim);font-size:17px;line-height:1.8;margin-bottom:20px">
+            ReachPoint was founded with a clear mission: to close the gap between great ideas and great content. We are a Cairo-based creative agency operating at the intersection of storytelling, strategy, and production.
+          </p>
+          <p style="color:var(--cream-dim);font-size:17px;line-height:1.8;margin-bottom:36px">
+            From scripting to shooting, editing to publishing — we handle every step with the same level of obsession. Because half-done content doesn't build half-serious brands. It builds none.
+          </p>
+          <a href="contact.html" class="btn btn-primary">Work With Us</a>
+        </div>
+        <div class="about-intro-visual reveal delay-2">
+          ReachPoint
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:rgba(254,239,221,0.01)">
+    <div class="container">
+      <div class="section-header reveal" style="text-align:center">
+        <p class="label">What Drives Us</p>
+        <span class="rule rule-center"></span>
+        <h2>Our Values</h2>
+      </div>
+      <div class="values-grid">
+        <div class="value-card reveal delay-1">
+          <span class="value-icon">🎯</span>
+          <h3>Precision</h3>
+          <p>We don't throw content at the wall. Every frame, every word is calculated and intentional. Quality over volume, always.</p>
+        </div>
+        <div class="value-card reveal delay-2">
+          <span class="value-icon">🎬</span>
+          <h3>Craft</h3>
+          <p>Production quality is non-negotiable. We bring cinematic standards to every project regardless of scale or budget.</p>
+        </div>
+        <div class="value-card reveal delay-3">
+          <span class="value-icon">📈</span>
+          <h3>Results</h3>
+          <p>Aesthetics without strategy is decoration. We combine beautiful content with data-backed planning to drive real growth.</p>
+        </div>
+        <div class="value-card reveal delay-2">
+          <span class="value-icon">🤝</span>
+          <h3>Partnership</h3>
+          <p>We work as an extension of your team. Your goals become ours. Your deadlines matter. Your brand is treated like it's our own.</p>
+        </div>
+        <div class="value-card reveal delay-3">
+          <span class="value-icon">⚡</span>
+          <h3>Speed</h3>
+          <p>Fast without sacrificing quality. Our streamlined workflows ensure you get high-end content on time, every time.</p>
+        </div>
+        <div class="value-card reveal delay-4">
+          <span class="value-icon">🔥</span>
+          <h3>Ambition</h3>
+          <p>We push boundaries. Safe content doesn't get remembered. We help brands be bold, be distinct, be unforgettable.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header reveal" style="text-align:center">
+        <p class="label">The People</p>
+        <span class="rule rule-center"></span>
+        <h2>Meet the Team</h2>
+        <p style="margin:0 auto;text-align:center">The creatives behind every frame, strategy, and idea that carries the ReachPoint name.</p>
+      </div>
+      <div class="team-grid">
+        <div class="team-card reveal delay-1">
+          <div class="team-photo">
+            <!-- Replace src with actual photo: <img src="images/kirolles.jpg" alt="Kirolles Youssef"> -->
+            👤
+          </div>
+          <h4>Kirolles Youssef</h4>
+          <p class="role">Founder & Creative Director</p>
+          <p style="color:var(--cream-dim);font-size:14px;margin-top:10px;line-height:1.6">Filmmaker, marketer, and the vision behind ReachPoint. Leads creative direction and production on all projects.</p>
+        </div>
+        <div class="team-card reveal delay-2">
+          <div class="team-photo">👤</div>
+          <h4>[Team Member]</h4>
+          <p class="role">Head of Content Strategy</p>
+          <p style="color:var(--cream-dim);font-size:14px;margin-top:10px;line-height:1.6">Replace with team member bio and photo.</p>
+        </div>
+        <div class="team-card reveal delay-3">
+          <div class="team-photo">👤</div>
+          <h4>[Team Member]</h4>
+          <p class="role">Lead Video Editor</p>
+          <p style="color:var(--cream-dim);font-size:14px;margin-top:10px;line-height:1.6">Replace with team member bio and photo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="text-align:center">
+    <div class="container">
+      <div class="reveal">
+        <p class="label">Get In Touch</p>
+        <span class="rule rule-center"></span>
+        <h2 style="margin-bottom:16px">Ready to Work Together?</h2>
+        <p style="color:var(--cream-dim);font-size:17px;max-width:480px;margin:0 auto 40px">Let's build something your audience won't scroll past.</p>
+        <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+          <a href="contact.html" class="btn btn-primary">Start a Project</a>
+          <a href="packages.html" class="btn btn-ghost">View Packages</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="js/layout.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
